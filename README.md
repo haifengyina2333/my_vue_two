@@ -1,5 +1,5 @@
 # 项目说明
-
+一个基于 Vue 2.7 和 Element-ui 的后台管理项目
 ## 项目相关依赖安装
 ```
 npm install
