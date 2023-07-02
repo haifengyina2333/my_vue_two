@@ -107,7 +107,7 @@ export default {
         },
     },
     created() {
-        // this.getCaptchaCode();
+        this.getCaptchaCode();
     }
 }
 </script>

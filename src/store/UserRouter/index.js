@@ -4,9 +4,11 @@ export default{
         menuData:[]
     },
     mutations:{
-        
+        initMenuData(state,payload){
+            state.menuData = payload;
+        }
     },
     actions:{
-        
+
     }
 }

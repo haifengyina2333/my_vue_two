@@ -7,28 +7,27 @@
       </span>
     </h1>
     <el-menu default-active="0" class="el-menu-vertical-demo" :collapse="isCollapse" :collapse-transition="false"
-      background-color="#2f90b9" text-color="#fff" :unique-opened="true" active-text-color="#ffd04b"
-      :router="true">
+      background-color="#add5a2" text-color="#fff" :unique-opened="true" active-text-color="#ffd04b" :router="true">
       <!-- @open="handleOpen" @close="handleClose" -->
       <div v-for="item, idx in menuData" :key="idx">
 
         <!-- 如果有子菜单 -->
-        <el-submenu :index="item.path" v-if="item.children" >
+        <el-submenu :index="item.path" v-if="item.children">
 
           <template slot="title">
             <i class="el-icon-location"></i>
-            <span>{{item.title}}</span>
+            <span>{{ item.title }}</span>
           </template>
 
 
-          <el-menu-item :index="sitem.path" v-for="sitem,sidx in item.children" :key="sidx">{{sitem.title}}</el-menu-item>
+          <el-menu-item :index="sitem.path" v-for="sitem, sidx in item.children" :key="sidx">{{ sitem.title }}</el-menu-item>
           <!-- <el-menu-item index="1-2">选项2</el-menu-item> -->
         </el-submenu>
 
         <!-- 没有子菜单 -->
         <el-menu-item :index="item.path" v-else>
           <i class="el-icon-menu"></i>
-          <span slot="title">{{item.title}}</span>
+          <span slot="title">{{ item.title }}</span>
         </el-menu-item>
 
       </div>
@@ -38,54 +37,55 @@
 
 <script>
 import { mapState } from "vuex"
-import {getUserRouterAPI} from '../../request/api.js';
+import { getUserRouterAPI } from '../../request/api.js';
 export default {
 
   data() {
     return {
-      menuData: [
-        {
-          title: "首页",
-          path:'/'
-        },
-        {
-          title: "客户管理",
-          path:"/customer",
-          children: [{
-            title: "客户档案",
-            path:"/customer/customer"
-          }, {
-            title: "拜访记录",
-            path:"/customer/visit"
-          }]
-        }, {
-          title: "修养预约",
-          path:"/business",
-          children: [
-            { title: "预约信息",
-            path:"/business/appointment",
-           },
-            { title: "服务项",
-            path:"/business/service",
-           },
-            { title: "结算单",
-            path:"/business/statement",
-           },
-          ]
-        }, {
-          title: '流程管理',
-          path:"/flow",
-          children: [{
-            title: "审核流程定义",
-            path:"/flow/definition"
-          }]
-        }
-      ]
+      // menuData: [
+      // {
+      //   title: "首页",
+      //   path:'/'
+      // },
+      // {
+      //   title: "客户管理",
+      //   path:"/customer",
+      //   children: [{
+      //     title: "客户档案",
+      //     path:"/customer/customer"
+      //   }, {
+      //     title: "拜访记录",
+      //     path:"/customer/visit"
+      //   }]
+      // }, {
+      //   title: "修养预约",
+      //   path:"/business",
+      //   children: [
+      //     { title: "预约信息",
+      //     path:"/business/appointment",
+      //    },
+      //     { title: "服务项",
+      //     path:"/business/service",
+      //    },
+      //     { title: "结算单",
+      //     path:"/business/statement",
+      //    },
+      //   ]
+      // }, {
+      //   title: '流程管理',
+      //   path:"/flow",
+      //   children: [{
+      //     title: "审核流程定义",
+      //     path:"/flow/definition"
+      //   }]
+      // }
+      // ]
     }
   },
   computed: {
     ...mapState({
-      isCollapse: state => state.NavbarCollapse.isCollapse
+      isCollapse: state => state.NavbarCollapse.isCollapse,
+      menuData: state => state.UserRouter.menuData
     })
   }
 }
@@ -98,18 +98,34 @@ export default {
   height: 100%;
   // 解决header的阴影覆盖问题
   position: relative;
-  background-color: #2f90b9;
+  background-color: #add5a2;
   box-shadow: 6px 0px 5px #ccc;
   transition: all .3s;
 
   .el-menu {
     border: 0px;
+
+    // 子菜单背景颜色和鼠标悬浮效果
+    ::v-deep .el-submenu__title:hover {
+      background-color: #acf0a2 !important;
+    }
+
+    ::v-deep .el-submenu .el-menu--inline .el-menu-item {
+      background-color: #add5d2 !important;
+
+      &:hover {
+        background-color: #acf0a2 !important;
+
+      }
+    }
   }
 
   &.nolong {
     width: 64px;
+
     .el-submenu__title span {
-      display: none!important;;
+      display: none !important;
+      ;
     }
 
     // 多一个东西，给它去掉
@@ -135,5 +151,4 @@ export default {
       left: 62px;
     }
   }
-}
-</style>
+}</style>
