@@ -72,20 +72,23 @@ export default {
                 if (valid) {
                     // 校验通过
                     // this.$message("登录成功")
-                    alert('submit!');
                     let res = await LoginAPI({
                         username:this.ruleForm2.username,
                         password:this.ruleForm2.password,
-                        code:this.ruleForm2.code,
+                        code:this.ruleForm2.cantchacode,
                         uuid:localStorage.getItem("db-captcha-uuid")
                     })
                     console.log(res);
-                    if(res.code == 200){
-                    this.$message.success("登陆成功")
-                    }else{
-                    this.$message.error("登陆失败")
+                    if(!res) return 
 
-                    }
+                    this.$message.success("登陆成功")
+                    // 清除uuid
+                    localStorage.removeItem("db-captcha-uuid")
+                    // 保存token
+                    localStorage.setItem("db-auth-token",res.token)
+
+                    // 跳转
+                    this.$router.push("/")
                 } else {
                     // 不通过的情况
                     this.$message.error("请输入正确的信息")
@@ -96,14 +99,11 @@ export default {
         },
         async getCaptchaCode() {
             let res = await getCaptchaCodeAPI();
-            if (res.code == 200) {
+            if (!res) return
                 console.log(res);
                 this.captchaSrc = this.captchaSrc + res.img
                 // 保存uuid
                 localStorage.setItem("db-captcha-uuid",res.uuid)
-            }else{
-                this.$message.error(`${res.msg}`)
-            }
         },
     },
     created() {
