@@ -27,18 +27,24 @@
 
 
             </div>
+
+        </div>
+        <div class="heander-bottom">
+            <Tags></Tags>
         </div>
         <!-- <el-button type="primary" icon="el-icon-search">搜索</el-button> -->
     </div>
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex'
 import Crumb from "@/components/Crunm.vue"
 import { IMG_BASEURL } from "@/uitls/baseURL"
+import Tags from "@/components/Tags.vue"
+
 export default {
     components: {
-        Crumb
+        Crumb, Tags
     },
     data() {
         return {
@@ -54,13 +60,15 @@ export default {
             this.isShow = !this.isShow;
             this.changeIsCollapse();
         },
-        hdcommand(com){
+        hdcommand(com) {
             console.log(com);
-            if(com == "logout"){
+            if (com == "logout") {
                 this.$message.success("退出成功!")
                 localStorage.removeItem("db-auth-token")
                 localStorage.removeItem("db-userInfo")
                 this.$router.push("/login")
+            } else if (com == "user"){
+                this.$router.push("/profile")
             }
         }
     },

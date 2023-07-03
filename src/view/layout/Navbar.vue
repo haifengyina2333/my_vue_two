@@ -6,7 +6,11 @@
         通用后台管理系统
       </span>
     </h1>
-    <el-menu default-active="0" class="el-menu-vertical-demo" :collapse="isCollapse" :collapse-transition="false"
+
+
+
+    <el-menu :default-active="$route.path" 
+    class="el-menu-vertical-demo" :collapse="isCollapse" :collapse-transition="false"
       background-color="#add5a2" text-color="#fff" :unique-opened="true" active-text-color="#ffd04b" :router="true">
       <!-- @open="handleOpen" @close="handleClose" -->
       <div v-for="item, idx in menuData" :key="idx">

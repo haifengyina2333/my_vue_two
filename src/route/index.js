@@ -1,5 +1,4 @@
 import VueRouter from "vue-router"
-import Home from '../view/Home.vue'
 import Vue from 'vue'
 import { getUserRouterAPI } from '../request/api.js';
 import store from "../store/index"
@@ -51,7 +50,7 @@ router.beforeEach(async (to, from, next) => {
         if (!getUserRouterAPIRes) return
         // 保存数据
         // vuex里的数据是空的，不会留存老数据
-        let newUserMenuData = [{ title: "首页", path: "/" }];
+        let newUserMenuData = [{ title: "首页", path: "/home" }];
         let ret = getUserRouterAPIRes.data.map(item => {
             if (item.children) {
                 return {
@@ -85,6 +84,12 @@ router.beforeEach(async (to, from, next) => {
             component:()=>import('../view/Home.vue'),
             meta:{
                 titles:["首页"]
+            }
+        },{
+            path:"/profile",
+            component:()=>import('../view/Profile.vue'),
+            meta:{
+                titles:["个人中心"]
             }
         }]
         getUserRouterAPIRes.data.forEach(item=>{
