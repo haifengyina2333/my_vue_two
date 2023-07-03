@@ -10,18 +10,21 @@ const routes = [{
     name: 'lauout',
     component: () => import("../view/layout/Main.vue"),
     redirect: "/home",
-    children: [{
-            path: '/home',
-            name: 'home',
-            // component:()=>import(" "),
-            component: () => import("../view/Home.vue")
-        },
-    ]
+    // children: [{
+            // path: '/home',
+            // name: 'home',
+            // // component:()=>import(" "),
+            // component: () => import("../view/Home.vue")
+        // },
+    // ]
 
 }, {
     path: '/login',
     name: 'login',
     component: () => import("../view/Login/Login.vue")
+},{
+    path:"*",
+    component:()=>import("../view/404.vue")
 }];
 
 const router = new VueRouter({
@@ -79,13 +82,19 @@ router.beforeEach(async (to, from, next) => {
 
         let newChildrenRouters=[{
             path:"/home",
-            component:()=>import('../view/Home.vue')
+            component:()=>import('../view/Home.vue'),
+            meta:{
+                titles:["首页"]
+            }
         }]
         getUserRouterAPIRes.data.forEach(item=>{
             let ret = item.children.map(sitem=>{
                 return{
                     path:item.path + "/" + sitem.path,
-                    component:()=>import(`../view${item.path}/${sitem.name}.vue`)
+                    component:()=>import(`../view${item.path}/${sitem.name}.vue`),
+                    meta:{
+                        titles:[item.meta.title,sitem.meta.title]
+                    }
                 }
             })
             newChildrenRouters = [...newChildrenRouters,...ret];

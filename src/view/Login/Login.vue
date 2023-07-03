@@ -27,6 +27,7 @@
 <script>
 import { vaildataUsername } from "../../uitls/validata"
 import { getCaptchaCodeAPI,LoginAPI } from "../../request/api"
+import { mapMutations,mapActions } from "vuex"
 
 export default {
     name: 'Login',
@@ -89,6 +90,7 @@ export default {
 
                     // 跳转
                     this.$router.push("/")
+                    this.asyncChangUserInfo();
                 } else {
                     // 不通过的情况
                     this.$message.error("请输入正确的信息")
@@ -105,9 +107,18 @@ export default {
                 // 保存uuid
                 localStorage.setItem("db-captcha-uuid",res.uuid)
         },
+        ...mapMutations({
+            initMenuData:"UserRouter/initMenuData"
+        }),
+        ...mapActions({
+            asyncChangUserInfo:"UserInfo/asyncChangUserInfo"
+        })
     },
     created() {
+        // 验证码请求
         this.getCaptchaCode();
+        // 清除Vuex的用户菜单数据
+        this.initMenuData([])
     }
 }
 </script>

@@ -38,4 +38,5 @@ export default {
     opacity: 1;
     transform: translateX(0px);
 
-}</style>
+}
+</style>

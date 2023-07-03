@@ -32,8 +32,6 @@ instance.interceptors.response.use(res=>{
             Message.error("登录过期了！");
             localStorage.removeItem("db-auth-token")
             router.push("/login");
-
-            
         }
 
         return false
