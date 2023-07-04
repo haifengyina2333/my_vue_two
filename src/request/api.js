@@ -12,3 +12,6 @@ export const getUserInfoAPI = () => instance.get("/prod-api/getInfo");
 export const getcustomerAPI = (params) => instance.get("/prod-api/customer", {params})
 // 导出表格
 export const exportCustomerAPI = (params,configs) => instance.post("/prod-api/customer/export", params,configs);
+
+
+export const BpmnInfoAPI = (params,configs) => instance.post("/prod-api/business/bpmnInfo", params,configs);
