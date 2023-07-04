@@ -101,10 +101,11 @@ export default {
   // width: 64px;
   height: 100%;
   // 解决header的阴影覆盖问题
-  position: relative;
+  position: fixed;
   background-color: #add5a2;
   box-shadow: 6px 0px 5px #ccc;
   transition: all .3s;
+  z-index: 1;
 
   .el-menu {
     border: 0px;

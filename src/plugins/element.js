@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Button,Input,Form,FormItem,Message,MenuItemGroup,Menu,MenuItem,Submenu,Breadcrumb,BreadcrumbItem,DropdownItem,DropdownMenu,Dropdown,Tag } from 'element-ui'
+import { Button,Input,Form,FormItem,Message,MenuItemGroup,Menu,MenuItem,Submenu,Breadcrumb,BreadcrumbItem,DropdownItem,DropdownMenu,Dropdown,TableColumn,Table,Tag,Pagination } from 'element-ui'
 // 提示框
 Vue.prototype.$message = Message;
 
@@ -17,3 +17,6 @@ Vue.use(DropdownItem)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(Tag)
+Vue.use(TableColumn)
+Vue.use(Table)
+Vue.use(Pagination)

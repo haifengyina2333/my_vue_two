@@ -26,6 +26,8 @@ export default {
   display: flex;
   .layout-right{
     flex:1;
+    padding-left: 240px;
+    width: 70%;
   }
 }
 </style>

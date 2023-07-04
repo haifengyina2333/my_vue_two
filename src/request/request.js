@@ -22,10 +22,10 @@ instance.interceptors.request.use(config=>{
 
 
 instance.interceptors.response.use(res=>{
-
+    // console.log(res);
     let res_data = res.data
-
-    if(res_data.code != 200 ){
+    // 导出功能，没有code
+    if(res_data.code && res_data.code != 200 ){
        Message.error(res_data.msg || "网络请求错误！");
         if(res_data.code == 401){
             // token过期，或者是没带
