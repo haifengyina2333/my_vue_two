@@ -92,12 +92,49 @@ export default {
             this.isShowTagsMenu=false;
         },
         clickMenu(i){
+            // 关闭全部
+            console.log(this.cickindex);
+
             if(i == 5){
                 this.tags = [ { title: "首页", path: "/home"}];
                 this.$router.push("/home");
                 this.closeMenu()
-            }else if(i == 2){
-                return
+            }
+            // 关闭其他
+            else if(i == 2){
+                this.tags = this.tags.filter((item,index)=>{
+                    return this.tags[index] == this.tags[this.cickindex];
+                })
+                this.tags.unshift({title:"首页",path:"/home"});
+            }
+
+            //关闭右侧
+            else if(i == 4){
+                this.tags = this.tags.filter((item,index)=>{
+                    return index <= this.cickindex;
+                })
+            }
+
+            // 关闭左侧
+            else if(i == 3){
+                this.tags = this.tags.filter((item,index)=>{
+                    return index >= this.cickindex;
+                })
+                this.tags.unshift({title:"首页",path:"/home"});
+
+            }
+
+            else if(i == 1){
+                this.tags = this.tags.filter((item,index)=>{
+                    return index != this.cickindex;
+                })
+                // this.tags.unshift({title:"首页",path:"/home"});
+                // 跳转到下一个路由
+                this.$router.push(this.tags[this.cickindex].path)
+            }
+
+            else if(i == 0){
+                this.$router.push(this.tags[this.cickindex].path);
             }
         }
     },
