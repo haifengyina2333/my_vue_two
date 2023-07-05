@@ -1,8 +1,7 @@
 <template>
-    <div class="content">
+    <div class="content" :class=" ($route.path == '/home')?'bg':''" >
         <!-- mode="out-in"  in-out-->
         <transition name="fade" mode="out-in">
-
             <router-view></router-view>
         </transition>
     </div>
@@ -17,6 +16,7 @@ export default {
 <style lang="less" scoped>
 .content {
     padding: 20px;
+    height: calc(100% - 124px);
 }
 
 // 进场开始,离场结束
@@ -38,5 +38,9 @@ export default {
     opacity: 1;
     transform: translateX(0px);
 
+}
+.bg{
+    background: url(../../assets/img/login.jpg) center top no-repeat;
+    background-size:100% 100%;
 }
 </style>
